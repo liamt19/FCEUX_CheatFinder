@@ -4,6 +4,9 @@ Uploading this so I don't lose it. This will create a random game genie code, ad
 Some iteresting codes I found with this:
 
 GGAOTA, KVTXNN, and UNKXON: Not sure what all is happening here, but these all mess with the world and graphics. KVTXNN is still playable.
+
 OIKNIL: Bowser is flying in the air and other strange things in 1-1, this crashes almost always though.
+
 YAETZE: All of the enemies are squished and jump around, touching a koopa crashes
+
 VKOUKU: Rains coins from the sky, and most enemies are holding hammers
