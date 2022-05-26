@@ -5,7 +5,9 @@ math.random(); math.random(); math.random();
 
 
 local loadMovie = true
+local useTurbo = true
 local code = ""
+local movieName = "speedrun.fm2"
 
 
 function RandomCode()
@@ -37,8 +39,13 @@ function DoNewCode()
 end
 
 function RestartMovie()
-	loaded = movie.play("speedrun.fm2", true)
-	--emu.speedmode("turbo")
+	loaded = movie.play(movieName, true)
+	if useTurbo then
+		emu.speedmode("turbo")
+	else
+		emu.speedmode("normal")
+	end
+	
 end;
 
 -- called by the onclose event (above)
@@ -75,7 +82,7 @@ function createGUI(n)
 		function (self) 
 			DoNewCode()
 		end;
-	myoutput = iup.multiline{size="200x100",expand="YES",value=""}
+	
 	doMovie = iup.toggle{title="Load a movie", value="ON"};
 	doMovie.action = 
 		function(self, v) 
@@ -87,22 +94,49 @@ function createGUI(n)
 			end;
 		end;
 	
+	local btn_toggleTurbo = iup.button{title="Toggle turbo"};
+	btn_toggleTurbo.action = 
+		function(self) 
+			if useTurbo then
+				useTurbo = false
+				emu.speedmode("normal")
+			else
+				useTurbo = true
+				emu.speedmode("turbo")
+			end;
+		end;
+	
+	myoutput = iup.multiline{size="100x100",expand="YES",value=""}
+	
 	handles[n] = 
 		iup.dialog{
 		  iup.frame
 		  {                   
 				iup.vbox
 				{
-					btn_restart,
-					btn_newCode,
-					doMovie,
+					iup.hbox {
+						btn_restart,
+						btn_newCode,
+						gap=78,
+						margin="5x5",
+						alignment="ACENTER",
+					},
+					
+					iup.hbox {
+						doMovie,
+						btn_toggleTurbo,
+						gap=50,
+						margin="5x5",
+						alignment="ACENTER",
+					},
+					
 					myoutput,
-					title="smbCheatFinder"
 				}
-			}
+			},
+			title="CheatFinder"
 		};
 
-	handles[n]:showxy(iup.CENTER, iup.CENTER)
+	handles[n]:showxy(430, 0)
 end
 
 
